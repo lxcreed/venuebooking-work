@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="/css/theme.css" type="text/css">
+    <title>场馆信息</title>
+</head>
+
+
+
+<body>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-3">场馆预约</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse"
+                data-target="#navbar20">
+            <p class="navbar-brand text-white mb-0">
+                <i class="fa d-inline fa-lg fa-stop-circle"></i> BRAND </p>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar20">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/index_user">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="/venue_user">场馆信息</a></li>
+                <li class="nav-item"><a class="nav-link" href="/information_user">个人信息</a></li>
+            </ul>
+            <p class="d-none d-md-block lead text-white mb-0 mr-3"><i class="fa d-inline fa-lg fa-stop-circle"></i>&nbsp;场馆信息&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-1"><a class="nav-link" href="/exit">
+                    <i class="fa fa-bitbucket fa-fw fa-lg">Exit</i>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="modal" th:each="venueDay:${venue.getRentDays()}" th:id="'venueDay'+${venueDay.getVenueDayID()}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:1000px">
+            <div class="modal-header" style="">
+                <h5 class="modal-title">选择预约时间段</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <form id="c_form-h" class="" onsubmit="return submit_check()"
+                  th:action="'/venueInformation_user/'+${venueDay.getVenueDayID()}+'/orderSubmit'" method="post">
+                <div class="modal-body">
+                    <p>绿色为可选时间，红色为不可选时间。<br>一天之中每个用户在同一场馆里只能预约一个连续的时间段。</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered ">
+                            <tbody>
+                            <tr>
+                                <th id="t1" th:class="${venueDay.getTimeParts()[0]}?'table-danger':'table-primary'">7-8</th>
+                                <th id="t2" th:class="${venueDay.getTimeParts()[1]}?'table-danger':'table-primary'">8-9</th>
+                                <th id="t3" th:class="${venueDay.getTimeParts()[2]}?'table-danger':'table-primary'">9-10</th>
+                                <th id="t4" th:class="${venueDay.getTimeParts()[3]}?'table-danger':'table-primary'">10-11</th>
+                                <th id="t5" th:class="${venueDay.getTimeParts()[4]}?'table-danger':'table-primary'">11-12</th>
+                                <th id="t6" th:class="${venueDay.getTimeParts()[5]}?'table-danger':'table-primary'">12-13</th>
+                                <th id="t7" th:class="${venueDay.getTimeParts()[6]}?'table-danger':'table-primary'">13-14</th>
+                                <th id="t8" th:class="${venueDay.getTimeParts()[7]}?'table-danger':'table-primary'">14-15</th>
+                                <th id="t9" th:class="${venueDay.getTimeParts()[8]}?'table-danger':'table-primary'">15-16</th>
+                                <th id="t10" th:class="${venueDay.getTimeParts()[9]}?'table-danger':'table-primary'">16-17</th>
+                                <th id="t11" th:class="${venueDay.getTimeParts()[10]}?'table-danger':'table-primary'">17-18</th>
+                                <th id="t12" th:class="${venueDay.getTimeParts()[11]}?'table-danger':'table-primary'">18-19</th>
+                                <th id="t13" th:class="${venueDay.getTimeParts()[12]}?'table-danger':'table-primary'">19-20</th>
+                                <th id="t14" th:class="${venueDay.getTimeParts()[13]}?'table-danger':'table-primary'">20-21</th>
+                                <th id="t15" th:class="${venueDay.getTimeParts()[14]}?'table-danger':'table-primary'">21-22</th>
+                                <th id="t16" th:class="${venueDay.getTimeParts()[15]}?'table-danger':'table-primary'">22-23</th>
+                            </tr>
+                            </tbody>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class="form-group row"><label for="st" class="col-2 col-form-label">开始时间</label>
+                        <div class="col-10">
+                            <select class="form-control" id="st" name="startTime">
+                                <option value="0">7:00</option>
+                                <option value="1">8:00</option>
+                                <option value="2">9:00</option>
+                                <option value="3">10:00</option>
+                                <option value="4">11:00</option>
+                                <option value="5">12:00</option>
+                                <option value="6">13:00</option>
+                                <option value="7">14:00</option>
+                                <option value="8">15:00</option>
+                                <option value="9">16:00</option>
+                                <option value="10">17:00</option>
+                                <option value="11">18:00</option>
+                                <option value="12">19:00</option>
+                                <option value="13">20:00</option>
+                                <option value="14">21:00</option>
+                                <option value="15">22:00</option>
+                                <option value="16">23:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row"><label for="et" class="col-2 col-form-label">结束时间</label>
+                        <div class="col-10">
+                            <select class="form-control" id="et" name="endTime">
+                                <option value="0">7:00</option>
+                                <option value="1">8:00</option>
+                                <option value="2">9:00</option>
+                                <option value="3">10:00</option>
+                                <option value="4">11:00</option>
+                                <option value="5">12:00</option>
+                                <option value="6">13:00</option>
+                                <option value="7">14:00</option>
+                                <option value="8">15:00</option>
+                                <option value="9">16:00</option>
+                                <option value="10">17:00</option>
+                                <option value="11">18:00</option>
+                                <option value="12">19:00</option>
+                                <option value="13">20:00</option>
+                                <option value="14">21:00</option>
+                                <option value="15">22:00</option>
+                                <option value="16">23:00</option>
+                            </select></div>
+                    </div>
+                    <div>
+                        <input type="hidden" class="form-control" id="form33" th:value="${venue.getVenueID()}"
+                               name="venueID">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" contenteditable="true">提交预约</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="order_twice">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">预约次数太多</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>一个场馆一天之中只能预约一次。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="conflict_error">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">时间冲突</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>与他人的时间段冲突，请更改预约时间。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-12 col-md-12">
+                    <h2>场馆信息</h2>
+                    <hr>
+                    <h1 class="display-4" th:text="${venue.getVenueName()}"> 场馆名</h1>
+                    <h3 th:text="'位置：'+${venue.getLocation()}">场馆位置</h3>
+                    <p class="lead" th:text="'每小时租金：'+${venue.getHourRent()}">价格 </p>
+                    <p th:text="'简介：'+${venue.getDescription()}">场馆介绍</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="">可用日期选择</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="list-group">
+                    <a th:each="venueDay:${venue.getRentDays()}" href="#"
+                       class="list-group-item list-group-item-action active"
+                       th:onclick="'$(\'#venueDay'+${venueDay.getVenueDayID()}+'\').modal();'"
+                       th:text="${venueDay.getDate()}"> 可用日期 </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="mb-0">J2EE PROJECT</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+<div th:utext="${alert_type}"></div>
+
+
+</body>
+
+</html>

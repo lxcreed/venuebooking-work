@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="/css/theme.css" type="text/css">
+    <title>场馆管理</title>
+</head>
+
+<script>
+    function add_venue() {
+        $("#add_venue").modal();
+    }
+
+    function submit_check() {
+        var venueName = document.getElementById("formVenueName").value;
+        var location = document.getElementById("formLocation").value;
+        var hourRent = document.getElementById("formHourRent").value;
+        var description = document.getElementById("formDescription").value;
+
+        if (venueName == null || venueName == "") {
+            $("#no_venueName").modal();
+            return false;
+        }
+        if (location == null || location == "") {
+            $("#no_location").modal();
+            return false;
+        }
+        if (hourRent == null || hourRent == "") {
+            $("#no_hourRent").modal();
+            return false;
+        }
+        if (isNaN(hourRent)) {
+            $("#hourRent_error").modal();
+            return false;
+        }
+        if (description == null || description == "") {
+            $("#no_description").modal();
+            return false;
+        }
+
+    }
+</script>
+
+
+<body>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-3">场馆预约</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse"
+                data-target="#navbar20">
+            <p class="navbar-brand text-white mb-0">
+                <i class="fa d-inline fa-lg fa-stop-circle"></i> BRAND </p>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar20">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/index_super">首页管理</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">场馆信息管理</a></li>
+                <li class="nav-item"><a class="nav-link" href="/orderForm_super">订单信息</a></li>
+            </ul>
+            <p class="d-none d-md-block lead text-white mr-5 mb-0"><i class="fa d-inline fa-lg fa-stop-circle"></i>场馆信息管理&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-1"><a class="nav-link" href="/exit">
+                    <i class="fa fa-bitbucket fa-fw fa-lg">Exit</i>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="modal" id="add_venue">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="/newVenueSubmit" method="post" onsubmit="return submit_check()">
+                <div class="modal-header">
+                    <h5 class="modal-title">场馆信息</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label for="formVenueName">场馆名</label><input type="text"
+                                                                                         class="form-control"
+                                                                                         id="formVenueName"
+                                                                                         name="venueName"></div>
+                    <div class="form-group"><label for="formLocation">场馆位置</label><input type="text"
+                                                                                         class="form-control"
+                                                                                         id="formLocation"
+                                                                                         name="location">
+                    </div>
+                    <div class="form-group"><label for="formHourRent">每小时金额（人民币）</label><input type="text"
+                                                                                               class="form-control"
+                                                                                               id="formHourRent"
+                                                                                               name="hourRent"
+                                                                                               style=""></div>
+                    <div class="form-group"><label for="formDescription">场馆描述</label><textarea class="form-control"
+                                                                                               id="formDescription"
+                                                                                               name="description"
+                                                                                               rows="3"
+                                                                                               style=""></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">提交场馆</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="no_venueName">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">缺少场馆名</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>请输入场馆名。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="no_location">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">缺少场馆地点</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>请输入场馆地点。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="no_hourRent">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">缺少场馆租金</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>请输入每小时金额。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="delete_error">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">无法删除场馆</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>场馆已被预约！<br>请联系用户通知其取消预约后再删除场馆。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="no_description">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">缺少场馆描述</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>请输入场馆描述。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="hourRent_error">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">租金输入非法</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>请检查每小时金额输入是否正确。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12"><a class="btn btn-primary mb-4" onclick="add_venue()"><i
+                        class="fa fa-download fa-fw"></i>&nbsp;添加场馆</a>
+                    <div class="card" th:each="venue:${venues}">
+                        <div class="card-body p-4">
+                            <h2 th:text="${venue.getVenueName()}">Venue Name</h2>
+                            <p th:text="${venue.getDescription()}">short description</p>
+                            <p th:text="'位置：'+${venue.getLocation()}">location</p>
+                            <p class="mb-0 lead"><a
+                                    th:href="'/venueInformation_super/'+${venue.getVenueID()}">编辑场馆信息</a></p><a
+                                class="btn btn-danger" th:href="'/venue_delete/'+${venue.getVenueID()}">删除</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="mb-0">J2EE PROJECT</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<div th:utext="${alert_type}"></div>
+
+</body>
+
+</html>

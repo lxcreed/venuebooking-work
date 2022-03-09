@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="/css/theme.css" type="text/css">
+    <title>个人信息</title>
+</head>
+
+<body>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-3">场馆预约</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" th:each="orderForm:${orderForms}" th:id="'orderForm'+${orderForm.getOrderFormID()}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">订单详细信息</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>预约人</td>
+                            <td th:text="${orderForm.getSubmitUserName()}">userName</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>UID</td>
+                            <td th:text="${orderForm.getUid()}">uid</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>场馆名</td>
+                            <td th:text="${orderForm.getVenueName()}">venueName</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>场馆ID</td>
+                            <td th:text="${orderForm.getVenueID()}">venueID</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>预约日期</td>
+                            <td th:text="${orderForm.getOrderDay()}">orderDay</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>开始时间</td>
+                            <td th:text="${orderForm.getStartTime()}">startTime</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>结束时间</td>
+                            <td th:text="${orderForm.getEndTime()}">endTime</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>总时长</td>
+                            <td th:text="${orderForm.getTotalTime()}">totalTime</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>金额</td>
+                            <td th:text="${orderForm.getRent()}">rent</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>订单提交时间</td>
+                            <td th:text="${orderForm.getSubmitTime()}">submitTime</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>订单号</td>
+                            <td th:text="${orderForm.getOrderFormID()}">orderFormID</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">修改昵称</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="form-group"><label>&nbsp; 新昵称</label><input type="text" class="form-control" id="form33"
+                                                                    style=""></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse"
+                data-target="#navbar20">
+            <p class="navbar-brand text-white mb-0">
+                <i class="fa d-inline fa-lg fa-stop-circle"></i> BRAND </p>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar20">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/index_user">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="/venue_user">场馆信息</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">个人信息</a></li>
+            </ul>
+            <p class="d-none d-md-block lead text-white mb-0 mr-3"><i class="fa d-inline fa-lg fa-stop-circle"></i>&nbsp;个人信息&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-1"><a class="nav-link" href="/exit">
+                    <i class="fa fa-bitbucket fa-fw fa-lg">Exit</i>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>UID</td>
+                            <td th:text="${user.getUid()}">uid</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>用户名</td>
+                            <td th:text="${user.getUserName()}">userName</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td contenteditable="true">昵称</td>
+                            <td th:text="${user.getNickName()}">nickName</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>注册时间</td>
+                            <td th:text="${user.getRegTime()}">regTime</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" th:each="orderForm:${orderForms}">
+                    <div class="card-body p-4">
+                        <h2 th:text="${orderForm.getVenueName()}">Venue Name</h2>
+                        <p th:text="${orderForm.getOrderDay()}">Date</p>
+                        <p th:text="${orderForm.getRent()}">Rent</p>
+                        <p class="mb-0 lead">
+                            <a th:onclick="'$(\'#orderForm'+${orderForm.getOrderFormID()}+'\').modal();'">订单详细信息</a>
+                        </p><a class="btn btn-danger"
+                               th:href="'/orderForm_delete/'+${orderForm.getOrderFormID()}">取消订单</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+</div>
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="mb-0">J2EE PROJECT</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
